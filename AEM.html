@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanket AEM Docs</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body class="main">
+<div class="container">
+    <h1> CMS </h1>
+
+<p>
+A CMS, or Content Management System, is a software application or platform that allows users to create, manage, 
+and publish digital content on the web without the need for extensive technical knowledge. Content can include text,
+ images, videos, documents, and more. A CMS simplifies the process of content creation and maintenance, making it easier
+  for individuals and organizations to manage their online presence.
+</p>
+
+In CMS content is the pages and digital content means the digital assets like images videos.
+
+types of CMS 
+
+Traditional (coupled if its binded to rendering fuponctionality and decoupled if its loosely binded to rendering functionality )and Headless (When your CMS only deliver you the content and not the rendering functionality then its called Headless)
+
+AEM is Hybrid CMS
+
+..............................
+
+if  your AEM software is running on your system then it call running AEM Instance.
+
+If you are running two AEM software then you have 2 AEM Instance
+
+AEM Instance are of two types 
+
+Author(where you create the content) and Publisher (where we serve the content to the end user)
+
+................................................................................................
+
+AEM Environment
+
+After writing the content by Author they publish it and they always publish two if incase one publish goes down. As AEM does not store cache so for every request it load. 
+To over come that there is a dispatcher which small piece of code comunicate with the publish. Different type of server has different diapatcher. Then there is load balancer to handle the load in between
+
+...............................................................................
+<br><br><br>
+
+password entered in cmd is admin123
+
+
+to run the AEM in powershell java -jar aem and tab
+
+same open powershell Get-Content -Path .\error.log -Wait
+
+---------------------------------------------------------------------------------------
+<br><br><br>
+
+in author mode we need to login with admin admin
+
+but in publish mode user can directly see the website as there is no need to login
+
+
+------------------------------------------------------------------------------
+<br><br><br>
+
+sites 
+
+Language master is a blueprint using which we will create new sites
+
+
+----------------------------------------------------------------------------
+
+<div class="path">
+    http://localhost:4502/system/console/bundles
+    <p>Url to upload the jar files after build</p>
+</div>  
+
+http://localhost:4502/crx/de/index.jsp
+
+
+---------------------------------------------------------------------------------
+<br><br><br>
+
+<h1>Live copy and Language copy</h1>
+
+<h2>Live copy</h2>  
+
+in language master there are various language and one of them is English. And If we want to create the site for India in English Language then we don't need to create it again. 
+As we already have the English Language available we can reuse it. And that is called Live Copy..
+
+
+
+<h2>Language Copy</h2>
+
+As we have created the English Language for India now we need to add one more language Hindi.
+So we will translate the English page to hindi page for that we use third party translator. Which will translate English to Hindi...
+
+<br>
+------------------------------------------------------------------------------------------------
+<br>
+<h1>Steps</h1>
+
+<ul>
+    <li>First create the site for the country. </li>
+
+      <li>Then create the Language copy from English.</li>  
+        
+      <li>  At last make a live copy of the the language copy </li>
+</ul>
+
+
+
+<br><br><br>
+
+<h1>Page properties, page operations</h1>
+
+page lock after locking the page no one will be able to add or edit the component of the that page.
+
+Publish page means when you move the page from author to publish mode.
+
+Unpublish means it will remove back from the public instances
+
+With view as a Admin you can access the page with all the permission
+
+<br><br><br>
+
+
+Practice the page operation
+
+
+
+<br><br><br>
+AEM is built on JCR (Java Content Repository) to save the data 
+<br><br><br>
+------------------------------------------------------------------------------------------
+<br><br><br>
+
+<h2>Step to create the template</h2>
+<br>
+<div class="path">
+    <b>Home -> Hammer -> General -> Template</b>
+</div>
+
+<br>
+<p>
+    Whatever the component we are adding are stored in form of nodes. And we are not able to adjust from the screen of drag and drop just go to crx/de and conf weRetail template  (youtube = AEM beginner #10 timeStamp 6:01 )
+
+AEM Editable template 
+
+Whenever the template is created its always in draft mode. So you need to go to the template the and enable to
+view while the page creation
+</p>
+
+<br>
+<h2>Template path in crx/de</h2>
+<br>
+<div class="path">
+    <b>conf -> projectSpecific Folder (project folder name) -> settings -> wcm -> templates  -> In templates you will find the template which you created -> structure -> jcr content -> root
+    </b>
+</div>
+
+<p>
+<strong>cq:allowedTemplates</strong> : As the name suggest. Whatever the tempate are passed in allowedTemplates field 
+only with that template you can create the page.
+</p>
+<hr>    
+
+<br><br><br>
+
+<h1>Policy</h1>
+
+    <p>
+        Policy means what kind of content we can add or allowed. All we need to check the boxes and that much content is allowed.
+
+So when the policy is made for particular page they will get access of that content only which is allowed in policy
+
+Policies are of two type Page Level Policy and Component Level Policy and you can always defined it in Structure Mode
+    </p>
+
+<br>
+<h4>Component level policy</h4>
+
+<p>When policy is applied to the specific component. So if we have two component then each component have the different policy
+</p>
+<h2>How to open in crx/de</h2>
+
+<div class="path">
+    conf -> projectFolder -> setting -> wcm -> templates  -> In templates you will find the template which you created -> policies -> jcr -> root -> and here are your policies
+
+</div>
+<hr>
+<br><br><br>
+
+<h1>AEM components</h1>
+
+User content -> Dialogue
+
+Access Content -> Sling Model
+
+Styling -> clientlibs
+
+Rendering -> sightly/HTL
+
+-------------------------------------------------------------------
+<br><br><br>
+Component Life Cycle
+
+1-> Drag and drop the component 
+
+##Everytime you create a component a node has been created and data is saved in a form of key value pair in JCR.
+
+2-> Save content in repository
+
+1 and 2 together is called Authoring
+
+as soon as the page relaod the SLING Model kicks in which is backkend and provides value to frontend
+
+even client libs will also load
+
+
+sightly has some place holder and sling model will inject that data to respective place holder.
+
+so HTML is generated and it is rendered by the browser
+
+-------------------------------------------------------------------
+<br><br><br>
+Lock and unlock Component Structure
+
+If you lock the layout container structure then you won't be able to add the content to it.
+
+ But once you unlock you are able to add the content but the structure is disturbed
+
+
+
+Once you added the image in template which is locked it is availble to all the pages created from that template untill its locked.
+
+But the moment you unlocked it. Its gone.
+
+After unlocking the content then its moved to the initial content. And if you create the new page out of it you will find that image in new page but not in old page as the new page is loaded with the initial content. 
+
+And if you lock the same content from the template the you will find it back on the pages.
+
+
+-------------------------------------------------------------------
+<br><br><br>
+
+<h2>Clientlibs</h2> 
+
+    <div class="path">
+        <b>in crx/de   app/weretail/clientlibs</b>
+    </div>
+<br>
+<p>left click on it and create node aem-demo and <strong>cq:ClientLibraryFolder</strong>
+<br>
+after that at the bottom of the page there is Name add categories to it select String and value as aem-demo and then add.
+<br>
+create txt file for css and js and then folder for css and js and even create resources file to add the static content.
+And whatever the file you are creating in css folder there name should be added in css.txt file. 
+<br>
+After that go to template and page policy
+<br>
+in properties add your libirary and go to style tab -> allowed style -> give the name -> Styles (give any name) with you css class name what you wrote
+<br>
+for more details goto this path /apps/weretail/clientlibs/sanket-lib/css/color.css
+<br>
+and you can add the styling to particluar component as well
+<br>
+All you need to do is goto your template -> add one layout container -> and goto the policy of that
+
+<br>
+<b>Dependencies --> </b>before running the particular clientlib if it has dependency then that will load first (means your client lib are depending upon other library so as they are dependency they will load first)
+<br>
+
+<b>Embed -> </b>what ever the extra library that you are providing will be available to use (means to add another clientlibs to defined clientlibs)
+<br>
+<b>Category -></b> It is a property to add the clientlibs  
+(so once you create a node xyz just at the bottom of the screen add/write categories and value should be node name)
+<br>
+<b>Allow proxy -> </b>this require to load clientlib on dispatcher
+<br>
+
+How to load clientLibs..?
+
+==> clientlibs.all  (js + css)
+clientlibs.css(only css)
+clientlibs.js (only js)
+
+</p>
+-----------------------------------------------------------------------------------
+<br><br><br>
+Style System in AEM
+
+
+open template in edit and go to page policy
+
+and then slide over style tab and then add property background Color and the class which you wrote the client libs and save it.
+
+You will find paint brush option with which you can change the background color
+
+-----------------------------------------------------------------------------------
+<br><br><br>
+Page Version
+
+Like when you want to edit the content of the page. But you want to keep the original copy of it to restore it if incase anything goes wrong is called page versioning.
+
+
+So we can create various page version like 1.0 and many more and we can even restore it and compare it with the new one.
+
+
+<div class="path">
+    path page version -> Weretail -> language Master -> select Page -> on top you will find option CREATE ->
+version 
+</div>
+
+
+
+-----------------------------------------------------------------------------------
+<br><br><br>
+
+Replication in AEM
+
+Whenever we want to move the content from the Author to Publish there is process call Replication
+
+Replication Agent ( Agent on publish, Agent on author, Activate  tree)
+
+We don't have the access to Agent on Publish so whatever  the agent you need on publish we create it on  Agent on author and then move it to publish
+
+
+Activate  tree is used to make site live in one go
+
+Reverse Replication => This is used when user submit the data like rating or review on publish agent and we need that data on author agent
+
+
+<div class="path">
+go to classic UI  localhost:4502/miscadmin  -> Replication ->Agent on AUthor -> new -> give name and create -> you will find your replication in list double click on that -> (by default its not active) click on edit -> enable  -> serilization (dropdown default)
+</div>
+
+-----------------------------------------------------------------------------------
+<br><br><br>
+Workflow in AEM
+
+Simple defination is that it will allow you to create the workflow means what all things should happen when you modifies the page.
+
+Like if you add the start -> page version -> end 
+
+then everytime you modifies it then it will follow the above workflow means it will create the  version of the page.
+
+-----------------------------------------------------------------------------------
+
+Steps to run the AEM Devlopment Environment if its giving the error
+
+
+just go to C drive then C:\Users\Admin\.m2\repository\com\github\eirslett then delete node and npm version 
+
+Then run the command mvn clean install and then  mvn clean install -PautoInstallPackage -PautoInstallBundle
+
+_________________________________________________________________________________________
+
+
+How code works in AEM...?
+
+in crx/de there is app folder in which you will have project specific folder
+
+in conf folder there may be cloud confinguration and other config
+
+
+in order to deploy we use cmd mvn clean install -PautoInstallPackage
+
+and then you will find the your project on AEM site
+
+and you will find that the demo site is alredy present will all the component
+
+when you edit it has 3 option first one is asset like image and video.
+
+2nd option is component.
+
+and 3rd option is hirearchy tree. where you will find the tree of compenent
+
+
+-----------------------------------------------------------------------------------
+<br><br><br>
+Sling Resource super type  simple word its a Inheritance...
+
+If same type of functionality is there wo we can reuse it with the help of sling:resourceSuperType
+
+
+
+<hr>
+<br><br><br>
+<h1>Site template properties</h1>  21/09/2023
+
+allowed Temp, 
+
+allowed Paths == this template will be created in specific path only means if you given the home path then it will not be created in any other 
+
+allowed Parent 
+
+Allowed Childern == it tell which template will be able to create the child pages
+
+
+-----------------------------------------------------------------------------------
+
+How to create AEM dialog
+	
+
+--------------------------------------------------------------------------
+
+thing to learn
+
+
+dependecies, category , embed, editable tempate as well 
+
+----------------------------------------------------------------------------
+<h4>
+sling:resourceType: Locate the resource to be used for rendering.
+
+sling:resourceSuperType: Locate the resource to be inherited, allowing us to override some of the scripts.
+</h4>
+<hr>
+<br><br><br>
+<h2>Project Structure in AEM</h2>
+<ol>
+<li>apps -> you will have project specific code</li>
+
+<li>conf -> conf is used to store the configuration</li>
+
+<li>content -> folder use to store the content of the site</li>
+</ol>
+<hr>
+Package Manager
+
+
+<hr>
+<br><br><br>
+<h1>Templates </h1> 21/09/2023
+
+<b>How to create</b>
+<div class="path">
+    ==> apps => ProjectFolder => templates => create Template
+</div>
+
+add this
+Lable: sanket-temp
+Title:
+sanket-teamplate-page
+Description:
+Temp to create the home page
+Resource Type:
+aemgeeks/components/structure/home (its the base page)
+Ranking:
+10
+
+
+YOu will find your template. Now go to the site and try to create the page with your template
+
+
+<div class="path">
+    Name = cq:allowedTemplates  Type = String  Value = /apps/aeemgeeks//templates/sanket-temp  only that tempates will be allowed to create the page 
+</div>
+
+----------------------------------------------------------------------------
+<br><br><br>
+
+<h1>Create Component</h1>
+<br>
+
+<div class="path">
+    <b>Path => </b>
+
+	`apps/projectFolder/components/(create folder) content/ (create component)/ create node nt:unstructured`
+
+<br>
+for example: /apps/sanketAemProject/components/content/sanketAuthor/cq:dialog/content/items/column/items/fname
+</div>
+
+
+<br>
+
+<h3>Incase you get the error that component are not showing on the page </h3>
+
+<p>Check the pom.xml file of that project folder and change the version of </p>
+
+<br>
+
+<pre>
+   
+<properties>
+
+    <aem.host>localhost<aem.host>
+    
+    <aem.port>4502</aem.port>
+    
+    <aem.publish.host>localhost</aem.publish.host>
+    
+    <aem.publish.port>4503</aem.publish.port>
+    
+    <sling.user>admin</sling.user>
+    
+    <sling.password>admin</sling.password>
+    
+    <vault.user>admin</vault.user>
+    
+    <vault.password>admin</vault.password>
+    
+    <frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>
+    
+    <strong>
+        core.wcm.components.version = 2.19.0 = core.wcm.components.version> (just chnage the verison to this exactly)
+    </strong>
+    
+    <bnd.version>5.1.2</bnd.version
+    
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    
+    <componentGroupName>My Adobe Project</componentGroupName>
+    
+    <properties>
+    
+    </pre>
+<br>
+
+<h1>Merge</h1>
+<br>
+        <p>You will find this path when you will open your project in intellj Idea</p>
+        <div class="path">
+            path => ui.apps => content => meta => vault => filter.xml
+        </div>
+<br>
+    <div class="xml">
+
+   <p> Initailly it should be like this</p> 
+
+    <br>
+
+    
+    workspaceFilter version="1.0" <br>
+        filter root="/apps/practice/clientlibs"/<br>
+        filter root="/apps/practice/components"/<br>
+        filter root="/apps/practice/i18n"/<br>
+    /workspaceFilter<br>
+        <br>
+   <p> just make it like this (just add mode = merge)</p>
+
+    workspaceFilter version="1.0"<br>
+    filter root="/apps/sanketAemProject/clientlibs" mode="merge"<br>
+    filter root="/apps/sanketAemProject/components" mode = "merge"<br>
+    filter root="/apps/sanketAemProject/i18n" mode = "merge"<br>
+    workspaceFilter<br>
+    </div>
+    <br><br><br>
+    <h3>Things to do after creating the component</h3>
+    <br>
+    <ul>
+        <li>Just go to your page</li>
+        <li>Form the top 3 option select the center option and click on Edit templates</li>
+        <li>The tempate will open</li>
+        <li>click on the container and then click on policy</li>
+        <li>Go to allowed components</li>
+        <li>You will find your component group</li>
+        <li>Just check that and save it</li>
+        <li>And you will find your component in the group</li>
+    </ul>
+    <hr>
+    <br><br><br>
+    <h1>Annotation</h1>
+    <br>
+    <ol>
+        <li>
+            <b>@ScriptVariable</b>     
+            <p>Suppose you want to inject resouse, page, component, design, style and node all these you can inject using script 
+                variable annotation
+            </p>       
+        </li>
+
+        <br>
+
+        <li>
+            <b>@Inject</b>
+            <p>When you want to inject the the name your entered in crx/de to here in intellj Idea code
+                or in other words you can say SLING MODEL
+            </p>
+        </li>
+        <br>
+        <li>
+            <b>@Via("resource")</b>
+            <p>As the value which we are updating are in resource and adaptable which we are using is SlingHttpServletRequest.class,
+                SO that the reason why which ever value we are updtaing its not getting that so its picking the default value.
+                <br>
+                So if we used this annotation then <b>@Via</b> then it will update the value whatever we are passing.
+                <br>
+                In simple words we can say when we want to use the other adaptables instead of default one
+            </p>
+        </li>
+        <li>
+            <b>@ValueMapValue</b>
+            <p>Its just alternative to the <b>@Inject</b> and <b>@Via</b>. All you can do us just remove both and used
+            <b>@ValueMapValue</b> </p>
+        </li>
+        <li>
+            <b>@SLingObject</b>
+            <p>ResourceResolver resourceResolver;</p>
+            <p>When we want to Inject commonly used Sling Object like Resource Resolver, Request, Response, SLing Script Helper</p>
+        </li>
+        <li>
+            <b>@Self</b>
+            <p>When you want to inject the Object itself</p>
+            <p>SlingHttpServletRequest slingHttpServletRequest;  now sling request is available inside your model</p>
+        </li>
+
+        <li>
+            <b>SlingHttpServletRequest.class</b>
+            <p>you cannot inject page model inside the Resource.class in that case you need to use SlingHttpServletRequest </p>
+            <p>provides methods for accessing Sling-specific information about the request, such as the resource being requested, the sling:resourceType, and sling:resourceSuperType of the resource, and more.</p>
+        </li>
+
+        <li>
+            <b>@Model</b>
+            <p>In order to treat class as a <b>Sling Model</b> we have to add the this annotation</p>
+            <h4>Adaptables</h4>
+            <p>It defines which sling model can be adapted to <b>Sling Model</b>. Basically it defines how SLing 
+            model will behave</p>
+            <h5>Adapters</h5>
+            <p>Its used to define the which interface to use. If you are not writing the interface then there is no need to use this.</p>
+            <h5>Resource.class</h5>
+            <p>abstracts content or data that can be stored and managed within a Sling-based application. 
+                Content, in this context, could refer to web pages, images, documents, configurations, 
+                or any other structured data.</p>
+            <h5>Resource Type</h5>
+            <p>Resources often have a "resource type" associated with them, which specifies
+                 the type or purpose of the content. For example, a resource might have a resource type of 
+                 "page" or "image," and this information can be used to determine how the content should be
+                  rendered or processed.</p>
+            <h5>defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL</h5>
+            <p>With this all the propperty become optional</p>
+            <h5>defaultInjectionStrategy = DefaultInjectionStrategy.REQUIRED</h5>
+            <p>With this all the propperty become Required</p>
+        </li>
+        <li>
+            <b>@Required</b>
+            <p>With this annotation that property become required. Means it cannot be null.</p>
+            <p>It can also override <b>defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL</b></p>
+        </li>
+        <li>
+            <b>@Optional</b>
+            <p>With this annotation that property become optional. Means you may fill the value to it or leave it blank.</p>
+        </li>
+
+        <li>
+            <b>Resource</b>
+            <p>A "Resource" represents a piece of content or data within a web application, often organized in a hierarchical structure.
+                 It is a fundamental abstraction used to manage and access data within the application.</p>
+                 <p>Hierarchical: Resources are typically organized hierarchically, forming a tree-like structure. 
+                    Each resource can have child resources, creating a parent-child relationship.</p>
+                    <p> Properties: Resources can have associated properties, which are key-value pairs used to store metadata or content-related information.</p>
+                </p>
+        </li>
+
+        <li>
+            <b>Resource Path</b>
+            <p>A "Resource Path" is a unique identifier that specifies the location of a resource within the hierarchy of the web application's content repository. 
+                It is a URL-like string that defines the path to a specific resource.</p>
+        </li>
+
+        <li>
+            <b>@RequestAttribute</b>
+            <p>If you want to pass any variable from sightly to SLing model then use this annotation. Below is the example</p>
+            <p>
+                <div class="code">
+                    @RequestAttribute(name = "rAttribute")
+                <br>
+                private String reqAttribute;
+                </div>
+            </p>
+        </li>
+
+        <li>
+            <b>@ResourcePath</b>
+            <p>To get a particular resource. Just provide the path of the resource and you will get that resource</p>
+            <p>for example <br>
+               <div class="code">
+                @ResourcePath(path = "/content/aemgeeks/us/en/home") <br>
+                @Via("resource") <br>
+                Resource resource;
+               </div>
+            </p>
+        </li>
+
+        <li>
+            <b>@PostConstruct</b>
+            <p>Once all the injection has been completed and then you want to use the Method 
+                then you can use this Annotation
+            </p>
+        </li>
+
+        <li> 
+            <b>@Named</b>
+            <p>This annotation act as alias name. Below is the example</p>
+            <p>
+                <div class="code">
+                    @Named("jcr:lastModified") <br>
+                String modified.
+                </div>
+            </p>
+
+            <p>so now instead of writing entire name everytime we can replace it with our own name</p>
+        </li>
+    
+    </ol>
+
+    <hr>
+
+    <h1>Composite</h1>
+    <p><b>Composite</b> are of two types <strong>True</strong> and <strong>False</strong></p>
+    <strong>TRUE</strong>
+    <p>If its true in that case it will create new node of String type. And the count depends on number of iteration</p>
+    <p>For Example: If you added two book  so two node will be created <br><strong>Item 0 : book 1</strong> <br>
+    <strong>Item 1: book 2</strong></p>
+    <br>
+    <strong>FALSE</strong>
+    <p>If it is false then it will create the String[]. For example <strong>Book1, Book2, ...., Book n</strong></p>
+    <p><b>When to use <strong>FALSE</strong></b></p>
+    <p>When you have single field in your multifield.</p>
+        <br>
+        <hr>
+
+    <h1>Content as a Service</h1>
+    <p>
+        Content as a Service (CaaS) is an architectural approach in Adobe Experience Manager (AEM) that allows you to treat content as a separate entity from the presentation layer. This approach enables you to create, manage, and deliver content independently from the front-end presentation, making it more flexible and adaptable for various channels and devices. Here's a more detailed explanation of Content as a Service in AEM:
+        <br>
+<b>Content Separation:</b>
+<br> With Content as a Service, you decouple your content from the presentation layer. Content is created and stored separately from how it will be displayed. This separation makes it easier to reuse content across different platforms, such as websites, mobile apps, and IoT devices.
+<br>
+<b>Headless CMS:</b>
+<br> AEM provides a headless CMS capability, which means it can serve content in a format-agnostic manner. Instead of delivering fully rendered HTML pages, AEM can provide content as raw data (usually in JSON format) via APIs. Developers can then use this data to build front-end experiences in any technology or framework.
+    </p>
+        <p>
+            In the @Model you will add one more field <strong>resourceType = path of the component which you wish to export</strong>.
+            <br>
+            And to make it a <strong>Sling Model Exoprter</strong> you just need to add this annotation
+            <br>
+            <p><b>@Exporter</b>(name="exporter, extensions="type, selector="selector")</p>
+            <p>name and extensions are mandatory selector is optional</p>
+            <p>Name can be <strong>Jackson</strong> or any other exporter. If you are creating your own exporter use that name.</p>
+            <p>And if the name is <strong>Jackson</strong> then type should be <strong>JSON</strong> as 
+            it export the content in JSON format. If you are using other then write the type accordingly</p>
+            <p><b>Jackson </b>is a exporter that comes with <strong>AEM</strong></p>
+            <b>Selector</b>
+            <p>The default selector value is <b>@Model</b> if you are not providing it. So whatever you are provding in Selector
+            you need to use that in URL</p>
+        </p>
+        <h4>Options</h4>
+        <p>If you want to customize the behaviour of the output like if you want to <strong>
+            sort in Alphabetical order 
+        </strong>  or any other customization then you can do it with Options</p>
+
+        <h4>How it will work in exporter</h4>
+        <p>All the getter methods will be exported in a form of <b>Key : Value</b> pair</p>
+        <div class="code">
+            public String getFirstName(){
+                <br>
+                return fname;
+                <br>
+            }
+        </div>
+        <p>So key will be <strong>firstName</strong>. From the method get will be removed and first letter will be in lowercase</p>
+
+        <h4>Path Example for Exporter</h4>
+        <div class="path">
+            /content/sanketAemProject/us/en/page-1/jcr:content/root/container/container/sanketbooks
+        </div>
+        <p>Get the path till the node</p>
+        <br>
+
+        <b>@JSONProperty</b>
+        <p>With this annotation you can change the name of getter</p>
+        <div class="code">
+            @JSONProperty(value = "author-name")
+            <br>
+            public String authorName(){
+                <br>
+                return "AEM GEEKS"
+                <br>
+            }
+        </div>
+        <p>So in the JSON format that name will appear which you provided in the property</p>
+        <br>
+
+        <b>@JSONRootName</b>
+        <p>With this annotation you can bring all the property inside one parent property</p>
+        <div class="code">
+            @JSONRootName("author-details")
+            <br>
+            public class AuthorImpl implements Author(){
+                <br>
+                return null
+                <br>
+            }
+        </div>
+        <p>But this will not work you need to add the <strong>Options</strong> to make it work</p>
+        <hr>
+
+
+        <h1>SLing Model Unit Test Case</h1>
+        <br>
+        <hr>
+
+        <h1>System User</h1>
+        <p>They are the user with minimum permission with which they can perform the task for the bundle which they are mapped </p>
+        
+        <br>
+        <h4>Steps to create System or Service User</h4>
+        <ol>
+            <li>http://localhost:4502/crx/explorer/index.jsp visit this link if you are not logged in then logged in with admin admin</li>
+            <li>Click on User Administration</li>
+            <li>New window will open and then click on Create System User</li>
+            <li>userId = sanket-test-user</li>
+            <li>Intermediate Path = system</li>
+            <li>click on green tick mark and close</li>
+            <br>
+            <li>http://localhost:4502/useradmin  and search for sanket-test-user ad you can assign the permission</li>
+            <li></li>
+        </ol>   
+        
+        <strong>Second way of doing it</strong>
+        <ol>
+            <li>http://localhost:4502/system/console/configMgr  go to this link</li>
+            <li>Search for Ensure Service User</li>
+            <li>Principal Name = sanketAemProject(folderName)/and whatever name you want to give</li>
+            <li>For permission check the video no. 26</li>
+            <b>now we need to map it</b>
+            <li>Now search for Service Mapper Amendment</li>
+            <li>Just add the bundle id and the name which you wish to give</li>
+        </ol>
+        
+        <hr>
+
+        <h1>OSGi Service</h1>
+        <p>It is used to call the method or to inject the method in Sling model.
+            <br>
+            With the Instance of that service you can call the methods.
+        </p>
+
+
+        <p>If you want to call your service in backkend module other than the  sling model then you can use
+            <b>@Refrence</b>
+        </p>
+
+        <p>WHen you have more than one implememtation of the Interface and both has same method then in that Case
+            you can use <b>ranking</b> <strong>
+                @ServiceRanking(1001)
+            </strong>
+            <strong>
+                @ServiceRanking(1000)
+            </strong>
+            The one with the higher ranking will be executed
+        </p>
+        <p>And if you are not providing the service ranking at that time it will always pick the older one.</p>
+
+        <b>Filter</b>
+        <p>If you want to call the particular implememtation then you need to use <strong>filter</strong>
+        </p>
+        <div class="code">
+            @OSGiService(filter="(component.name=copy fully qualified name of the implememtation class)")
+            <br>
+            MultiService multiService;
+        </div>
+        <br>
+        <b>Target</b>
+        <p>If you want to call particluar service in any backend module then</p>
+        <div class="code">
+            @Refrence(target="(component.name=copy fully qualified name of the implememtation class)")
+            <br>
+            MultiService multiService;
+        </div>
+        <hr>
+        <br>
+        <h3>OSGi configuration field</h3>
+        <ol>
+            <li><Strong>Text</Strong>(String, Int, Long, Short)</li>
+            <li><Strong>Checkbox</Strong></li>
+            <li><Strong>Array</Strong></li>
+            <li><Strong>Dropdown</Strong></li>
+        </ol>
+
+        <strong>@ObjectClassDefinition</strong>
+        <p>Used to generated OSGi configuration field</p>
+        <p>for checkbox you will have type boolean</p>
+        <p>for Dropdown you will have Options in form of label and value</p>
+
+        <h3>Factory Configuration</h3>
+        <p>You can add as many number of configuration with different value</p>
+
+
+        <br>
+
+        <h3>Run Modes</h3>
+        <p>Run modes let you tune your AEM instance for a specific purpose;
+             for example author or publish, test, development, intranet or others. 
+             You can: Define collections of configuration parameters for each run mode.</p>
+            <br>
+        <h4>Installation Run Mode</h4>
+        <ul>
+            <li>author</li>
+            <li>publish</li>
+            <li>samplecontent</li>
+            <li>nosamplecontent</li>
+        </ul>
+
+
+    <p>These are two pairs of mutually exclusive run modes; for example, you can:
+        <br>
+       <li> define either author or publish, not both at the same time</li>
+        <br>
+    <li>
+        combine author with either samplecontent or nosamplecontent (but not both)</li>
+    </p>
+    <br>
+    <h4>Customized Run Modes</h4>
+    <ul>
+        <li>prod</li>
+        <li>Stage</li>
+        <li>QA</li>
+        <li>local</li>
+    </ul>
+    <br>
+    <h4>Set Run Modes</h4>
+    <ol>
+        <li>System Properties (-Dsling.run.modes=publish,prod,us)</li>
+        <li>Filename Detection (aem-publish-p4502)</li>
+        <li>-r option (java -jar filename -r publish, prod, us)</li>
+        <li>Start Srript (update the start script)</li>
+    </ol>
+    <br>
+    <h4>To find the Run Modes</h4>
+    <div class="path">
+        <li>open = http://localhost:4502/system/console/bundles</li>
+        <li>click on <b>Status</b> and find <strong>sling setting </strong>in dropdown list and click on it</li>
+        <li>And you will find your run modes there.</li>
+
+        <b>You can even edit it from the Start Script</b>
+
+        <li>Browse to the directory where your AEM instance is</li>
+        <li>open crx-quickstart</li>
+        <li>open bin</li>
+        <li>Click on start where type is FILE</li>
+        <li>And now open it with notepad and start editing it.</li>
+
+    </div>
+    <br>
+    <h4>OSGi configurations with different Run Modes</h4> <br>
+    <p>If you have AEM running instance with run modes <strong>author and Local</strong></p>
+    <p>It will first try to match maximum number of <b>Run Modes</b>. And with these run modes it will try to find the 
+    config folder. <strong>config.author.local</strong></p>
+    <p>If that folder is not available then it will pick <b>Environment specific</b> <strong>config.local</strong> config folder</p>
+    <p>And if it still doesn't find the folder then it will check in <strong>config</strong></p>
+    <p>If config folder is like this <br>
+        <strong>config.author.local</strong> <br>
+        <strong>config.local.author</strong>
+        <br>
+        It will pick <b>config.author.local</b> as it takes run modes from <b>Left to Right</b> 
+    </p>
+    <p>It gives preference to Installation Run modes first, so better try to create config folder for Environment Specific</p>
+
+    <br>
+
+    <h4>OSGi configuration definition (OCD, @Designate)</h4>
+        <strong>OCD</strong> <b>(Object Class Definition)</b>
+        <p> An Object Class Definition (OCD) is a metadata construct used to define the configuration parameters for an OSGi service or component. 
+            It describes the configuration options, data types, and default values for configuring the service.</p>
+            <p>OCDs provide a formal way to specify the configuration properties that can be set for an OSGi component.
+                 They help ensure that the configuration is correctly documented and validated, 
+                 and they make it easier for administrators and developers to understand and configure the component.</p>
+
+        <p>Think of OCD as a blueprint for your configuration. 
+        It's like a form where you define what settings you want to be configurable for your component or service. 
+        For example, imagine you're building a component that displays a slideshow on a webpage. 
+         You might want to allow users to configure things like the slide delay, animation style, and slide images.</p>
+
+        <div class="code">
+            @ObjectClassDefinition(name = "Slideshow Configuration") <br>
+public @interface SlideshowConfig {<br>
+    @AttributeDefinition(name = "Slide Delay", description = "Delay between slides in milliseconds")<br>
+    int slideDelay() default 5000;<br>
+<br>
+    @AttributeDefinition(name = "Animation Style", description = "Choose slide transition animation")<br>
+    String animationStyle() default "fade";<br>
+<br>
+    @AttributeDefinition(name = "Slide Images", description = "List of image paths for slides")<br>
+    String[] slideImages() default {};<br>
+}<br>
+<br>
+</div>
+
+<h4>@Designate</h4>
+<p>The @Designate annotation is used in Java code to link an OSGi component to its corresponding OCD. 
+    It tells the OSGi framework which OCD to use for configuring a specific component.</p>
+<p>Now, let's say you have a Java class SlideshowComponent that needs to use these configuration settings.
+     You use the @Designate annotation to connect your component with the OCD. It's like saying, 
+    "Hey, this SlideshowComponent should be configured using the settings defined in the SlideshowConfig OCD."</p>
+
+    <hr>
+    <br>
+    <h1>Sling Servlet</h1>
+
+    <p>They are of two types <Strong>Resource Type</Strong> and <Strong>Path</Strong></p>
+        <br><br>
+        <h4>How to set the path</h4>
+        <ul>
+            <li>goto system/console/configMgr</li>
+            <li>Search <b>Script Resolver</b></li>
+            <li>Click on it and you will find Execution Path</li>
+            <li>add your own path there</li>
+            <li>For more detail check video number 38 of Aem Geek Tutorial</li>
+        </ul>
+
+        <br>
+
+        <h4>Url for Do Get Method</h4>
+        <b>http://localhost:4502/content/sanketAemProject/us/en/_jcr_content.test.xml</b>
+            <br><br>
+        <h4>Ways of Witing Servlet</h4>
+        <ul>
+            <li>OSGi DS 1.4 (R7) <b>bnd-maven-plugin 4.0+</b></li>
+            <li>OSGi DS 1.2 (R5) <b>bnd-maven-plugin 3.0+</b></li>
+        </ul>
+
+        <p><Strong>Servlet Extends</Strong> two method <b>SlingSafeMethodServlet</b> and <b>SlingAllMethodServlet</b></p>
+        <hr><br>
+
+        <h1>Sling Scheduler</h1>
+ 
+        <p>Scheduler can be implemented using two type <b>Runnable Interface</b> and <b>Job Interface</b></p>
+
+        <hr>
+        <br>
+        <h1>Query Builder</h1> <br>
+        <h4>Link to Query Builder Console</h4>
+        <div class="path">
+            http://localhost:4502/libs/cq/search/content/querydebug.html
+        </div>
+
+        <h4>Query And There Descritiopn</h4>
+        <ol>
+            <li><strong>type</strong>
+                <div class="example">
+                    Example = type=cq:Page
+                </div>
+                <p>It use to specify which kind of node we want to search like Page or any other assets</p>
+            </li>
+            <li><strong>path</strong>
+                <div class="example">
+                    Example = path=/content/sanketAemProject
+                </div>
+                <p>It use to specify the path in order to search in specific folder</p>
+            </li>
+
+            <li><strong>p.limit</strong>
+                <div class="example">
+                    Example = p.limit=3 and p.limit=-1
+                </div>
+                <p>It use to specify the number of result you wish to display on page.
+                    And -1 you can display all the result.
+                </p>
+            </li>
+
+            <li><strong>property</strong>
+                <div class="example">
+                    Example = property=cq:template
+                    <br>
+                    property.value=/apps/aemgeeks/templates/geeks-content
+                </div>
+                <p>When you wish to search the content based on particular property</p>
+            </li>
+
+            <li><strong>property.1_value, property.2_value</strong>
+                <div class="example">
+                    Example = property.1_value=XML Exporter
+                    <br>
+                    property.1_value=Author Bio
+                </div>
+                <p>When you want to define multiple value for the particular property. By default it has <strong>OR</strong> value.</p>
+            </li>
+
+            <li><strong>property.and</strong>
+                <div class="example">
+                    Example = property.and=true
+                </div>
+                <p>When you want the result based on both the parameters</p>
+            </li>
+
+            <li><strong>group</strong>
+                <div class="example">
+                    Example <br>
+                    group.p.or=true <br>
+                    group.1_property=jcr:content/cq:template <br>
+                    group.1_property=/apps/aemgeeks/templates/geeks-home <br>
+                    group.2_property=jcr:content/cq:title <br>
+                    group.2_property=Xml Exporter <br>
+
+                </div>
+                <p>When you want to do the OR between different values</p>
+            </li>
+
+            <li><strong>p.hits</strong>
+                <div class="example">
+                    Example <br>
+                    p.hits=selective <br>
+                    p.properties=jcr:content/cq:ttitle jcr:content/cq:template
+                </div>
+                <p>
+                    With the selective it will display only selected content.
+                </p>
+            </li>
+
+            <li><strong>orderby</strong>
+
+                <div class="example">
+                    Example = orderby=@jcr:content/cq:lastModified
+                </div>
+
+                <p>
+                    It is used to sort the content.
+                </p>
+            </li>
+
+            <li><strong>offset</strong>
+
+                <div class="example">
+                    Example  <br>
+                    type=dam:Asset <br>
+                    path=/content/dam/we-retail <br>
+                    p.offset = 20 <br>
+                    p.limit = 20 <br>
+                </div>
+
+                <p>
+                    It is used to sort the content.
+                </p>
+            </li>
+
+            <li><strong>guessTotal</strong>
+
+                <div class="example">
+                    Example  <br>
+                    type=dam:Asset <br>
+                    path=/content/dam/we-retail <br>
+                    p.offset = 20 <br>
+                    p.limit = 20 <br>
+                    p.guessTotal=true
+                </div>
+
+                <p>
+                    With this it will only search the content till the specified limit.
+                </p>
+            </li>
+
+        </ol>
+
+        <hr>
+        <br>
+
+        <h1>Event Handling</h1>
+        <p>Event are of two types <b>JCR Based Event Handling</b> and <b>Resource Based Event Handling</b></p>
+        <p><b>Resource Based Event Handling</b> are also of two types 
+            <ol>
+                <li>OSGi API Based Event Handling</li>
+                <li>Sling API Based Event Handling</li>
+            </ol>
+        </p>
+
+        <strong>Sling Job Manager / Job Consumer</strong>
+        <p>It will execute atleast once even if the instance goes down. And it will also provide the status.
+            Other APIs does not garuentee.
+            <br>
+            <b>Job Manager</b> allows you to create new Job and <b>Job Consumer</b> allows you to consume the created job.
+        </p>
+        <br>
+        <h4>Job Consumer Return Status</h4>
+        <ul>
+            <li><b>OK</b> processing finished successfully</li>
+            <li><b>FAILED</b> Processing failed but might be retried. But it will retry within the limit of retry count.</li>
+            <li><b>CANCEL</b> Processing failed permanently and will not retry now.</li>
+            <li><b>ASYNC</b> If there are more than one job then it will process asynchronously</li>
+        </ul>
+
+        <h4>Path to your Job in crx/de</h4>
+        <div class="path">
+            /var/eventing/jobs/cancelled/yourJobName
+        </div>
+        <br>
+        <h4>Job Configuration (like editing the retry time and other stuff)</h4>
+        <strong>STEP</strong>
+        <ol>
+            <li>visit this link : <b>http://localhost:4502/system/console/slingevent</b></li>
+            <li>Search for this <b>"main queue"</b></li>
+            <li>Click on <b>edit</b> and change the configuration as per your needs</li>
+        </ol>
+<br>
+        <strong>EVENT_FILTER</strong>
+        <p>In Event Filter we define the path where the Event Listener will listen to.</p>
+
+        <strong>EVENT_TOPIC</strong>
+        <p>It defines which kind of Event to listen such has <b>ADDED</b> or <b>CHANGED</b></p>
+        
+        <strong>Session</strong>
+        <p>From Session we have to get the default workspace and from that the Observation Manager you can addEventListener</p>
+
+        <strong>Replication Event</strong>
+        <p>They are of two types <b>Activate</b> and <b>Deactivate</b>. If you publish and unplish the page it will 
+        be showed in the logs.</p>
+            <br>
+        <h4>Page Event Handler</h4>
+
+        <hr>
+        <br>
+        <h1>Context Aware Configuration</h1>
+        <p>When you want to add different configuration to different country site. When you want to add config 
+            aware property then you need to add property <b>sling:configRef</b> and then point out the 
+            folder where config aware settings are <b>/conf/aemgeeks</b>.
+        </p>
+        <p>You can create country specific configuration like this</p>
+        <ul>
+            <li>/conf/aemgeeks/in</li>
+            <li>/conf/aemgeeks/us</li>
+            <li>/conf/aemgeeks/de</li>
+        </ul>
+
+    </div>
+</body>
+</html>
+
+
+
+<!-- type=cq:Page
+path=/content/sanketAemProject
+p.limit=3
+p.limit=-1
+
+
+
+
+-->

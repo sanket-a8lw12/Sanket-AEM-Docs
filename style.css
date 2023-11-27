@@ -1,0 +1,63 @@
+.xml{
+    color: brown;
+    font-size: large;
+}
+
+.main{
+    background-color: black;
+    text-align: justify;
+}
+
+.container{
+    color: white;
+}
+
+ul{
+    color: yellow;
+    font-size: large;
+}
+
+ol{
+    color: rgb(70, 232, 81);
+    font-size: large;
+}
+
+.path{
+    font-style: italic;
+    color: rgb(173, 105, 22);
+    font-size:larger;
+}
+
+p{
+    font-size: large;
+    color: aqua;
+}
+
+h1 {
+    color: red;
+}
+
+pre{
+    color: azure;
+}
+
+b{
+    color: orchid;
+}
+
+strong{
+    color:bisque;
+}
+
+.code{
+    color: darkorange;
+}
+
+hr{
+    color: chartreuse;
+}
+
+.example{
+    color: rgb(129, 68, 129);
+    font-size: large;
+}
